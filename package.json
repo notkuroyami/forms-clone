@@ -1,0 +1,23 @@
+{
+  "name": "forms-clone",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"cd packages/server && npm run dev\" \"cd packages/client && npm run dev\"",
+    "install:all": "npm install"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^6.2.1",
+    "@graphql-codegen/typescript": "^5.0.9",
+    "@graphql-codegen/typescript-operations": "^5.0.9",
+    "@graphql-codegen/typescript-rtk-query": "^4.0.0",
+    "concurrently": "^9.2.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "graphql-tag": "^2.12.6"
+  }
+}

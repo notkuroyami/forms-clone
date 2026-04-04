@@ -1,0 +1,50 @@
+# Запит для списку всіх форм
+query GetForms {
+  forms {
+    id
+    title
+    description
+  }
+}
+
+# Запит для отримання однієї форми за ID (для заповнення)
+query GetForm($id: ID!) {
+  form(id: $id) {
+    id
+    title
+    description
+    questions {
+      id
+      type
+      title
+      options
+    }
+  }
+}
+
+# Запит для отримання відповідей (для сторінки результатів)
+query GetResponses($formId: ID!) {
+  responses(formId: $formId) {
+    id
+    formId
+    answers {
+      questionId
+      value
+    }
+  }
+}
+
+# Мутація для створення нової форми
+mutation CreateForm($title: String!, $description: String, $questions: [QuestionInput!]) {
+  createForm(title: $title, description: $description, questions: $questions) {
+    id
+    title
+  }
+}
+
+# Мутація для відправки відповідей
+mutation SubmitResponse($formId: ID!, $answers: [AnswerInput!]) {
+  submitResponse(formId: $formId, answers: $answers) {
+    id
+  }
+}
