@@ -2,6 +2,8 @@ import { Routes, Route, Link } from 'react-router-dom';
 // Використовуємо 'type' для імпорту типів, щоб уникнути помилки verbatimModuleSyntax
 import { useGetFormsQuery, type GetFormsQuery } from './shared/api/generated';
 import { FormBuilder } from '../src/pages/FormBuilder';
+import { FormFill } from '../src//pages/FormFill';
+import { FormResponses } from '../src/pages/FormResponses';
 
 // Типізуємо одну форму, витягуючи тип із масиву в запиті
 type FormItem = GetFormsQuery['forms'][number];
@@ -28,7 +30,7 @@ const HomePage = () => {
         <Link to="/forms/new">
           <button style={{ 
             padding: '10px 24px', 
-            backgroundColor: '#673ab7', 
+            backgroundColor: 'darkblue', 
             color: 'white', 
             border: 'none', 
             borderRadius: '4px',
@@ -59,10 +61,10 @@ const HomePage = () => {
             {form.description && <p style={{ color: '#70757a', fontSize: '14px', margin: '0 0 16px 0' }}>{form.description}</p>}
             
             <div style={{ display: 'flex', gap: '24px', borderTop: '1px solid #f1f3f4', paddingTop: '12px' }}>
-              <Link to={`/forms/${form.id}/fill`} style={{ color: '#1a73e8', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>
+              <Link to={`/forms/${form.id}/fill`} style={{ color: 'darkblue', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>
                 Заповнити
               </Link>
-              <Link to={`/forms/${form.id}/responses`} style={{ color: '#5f6368', textDecoration: 'none', fontSize: '14px' }}>
+              <Link to={`/forms/${form.id}/responses`} style={{ color: 'green', textDecoration: 'none', fontSize: '14px' }}>
                 Відповіді
               </Link>
             </div>
@@ -70,7 +72,7 @@ const HomePage = () => {
         ))}
         
         {(!data?.forms || data.forms.length === 0) && (
-          <div style={{ textAlign: 'center', color: '#70757a', marginTop: '60px' }}>
+          <div style={{ textAlign: 'center', color: 'red', marginTop: '60px' }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>📝</div>
             <p>У вас ще немає створених форм.</p>
             <p style={{ fontSize: '14px' }}>Натисніть кнопку вище, щоб почати.</p>
@@ -87,8 +89,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/forms/new" element={<FormBuilder />} />
-        <Route path="/forms/:id/fill" element={<div style={{ padding: '20px' }}>Сторінка заповнення (в розробці)</div>} />
-        <Route path="/forms/:id/responses" element={<div style={{ padding: '20px' }}>Результати (в розробці)</div>} />
+        <Route path="/forms/:id/fill" element={<FormFill />} />
+        <Route path="/forms/:id/responses" element={<FormResponses />} />
       </Routes>
     </div>
   );
